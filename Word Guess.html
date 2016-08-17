@@ -1,0 +1,86 @@
+<html>
+<head>
+<script>
+
+var words=['hello','morning','evening','afternoon','lunch','dinner','dictionary','mindblowing','brainstorming','lovely','desperate'];
+
+var str;
+
+function create(){//alert();
+	//var str='hello';
+	str=words[Math.floor((Math.random()*10))];//alert(str);
+	var i,x;
+	for(i=0;i<str.length;i++)
+	{
+		x=document.createElement('div');
+		x.setAttribute('class',str.charAt(i));
+		x.id='divs';//alert(x.className);
+		//x.id=str.charAt(i);alert(x.id);
+		x.innerHTML='<center>_</center>';
+		document.getElementById('main1').appendChild(x);
+	
+	}
+}
+
+var f=0;
+ function add(event){
+ 
+		//var c = ('charCode' in event) ? event.charCode : event.keyCode;
+		var c=event.charCode;
+		var d=String.fromCharCode(c);//alert(d+' '+c);
+		if(str.indexOf(d)!='-1')
+		{
+			var y=document.getElementsByClassName(d);//alert(y.id);
+			//for(var i=0;i<y;;) 
+			//alert(y.length);
+			for(var i=0;i<y.length;i++)
+			y.item(i).innerHTML='<center>'+d+'</center>';
+		}
+		else
+		{//alert();
+			if(f==0)
+			{
+				var x=document.createElement('div');
+				x.className='wrongs';
+				x.id='w'+f;//alert(x.id);
+				x.innerHTML='<center>'+d+'</center>';
+				document.getElementById('main2').appendChild(x);
+				f++;
+			}
+			else 
+			{
+				var t=0;
+				var y=document.getElementsByClassName('wrongs');//alert();
+				for(var i=0;i<y.length;i++)
+				{//alert(y.item(i).innerHTML);
+					if(y.item(i).innerHTML.charAt(8)==d)
+						t=1;				
+				}
+				if(t==0)
+				{
+					var x=document.createElement('div');
+					x.className='wrongs';
+					x.id='w'+f;//alert(x.id);
+					x.innerHTML='<center>'+d+'</center>';
+					document.getElementById('main2').appendChild(x);
+					f++;
+				}
+			}
+		}
+		
+    }
+	
+</script>
+<style>
+#divs{position:relative;float:left;background:red;font-size:50px;width:50px;}
+.wrongs{position:relative;float:left;top:0px;background:red;font-size:50px;width:50px;}
+
+</style>
+</head>
+<body onload="create()" onkeypress="add(event)">
+
+	<div id="main1" style="height:100px;width:700px;padding:30px;background:grey;"></div>
+	<div id="main2" style="height:200px;width:700px;padding:30px;background:grey;"></div>
+
+</body>
+</html>
